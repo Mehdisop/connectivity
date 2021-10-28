@@ -1,0 +1,9 @@
+---
+- hosts: all
+  tasks:
+   - name: ping gateway
+     script: scripts/ping-interfaces.sh
+     register: shell_result
+   - local_action: shell echo {{shell_result.stdout_lines}} >> playbook-GW.log
+   - debug:
+       var: shell_result.stdout_lines
